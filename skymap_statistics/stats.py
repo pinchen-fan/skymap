@@ -35,17 +35,17 @@ def cos_dtheta(theta1, phi1, theta2, phi2, safe=False):
 #
 #=================================================
 def rankmap(posterior, npix=None, normed=True):
-        """
-        converts a posterior into a rank map. Small ranks correspond to large posterior weight
-        WARNING: rankmaps do not sum to unity!
-        """
+	"""
+	converts a posterior into a rank map. Small ranks correspond to large posterior weight
+	WARNING: rankmaps do not sum to unity!
+	"""
 	if not npix:
 		npix = len(posterior)
-        rankmap = np.empty(npix,int)
-        rankmap[posterior.argsort()] = np.arange(npix)[::-1]
-        if normed:
-            rankmap /= 1.0*npix
-        return rankmap
+	rankmap = np.empty(npix,int)
+	rankmap[posterior.argsort()] = np.arange(npix)[::-1]
+	if normed:
+		rankmap /= 1.0*npix
+	return rankmap
 
 ###
 def resample(posterior, new_nside, nest=False):
@@ -62,12 +62,12 @@ def __to_cumulative(posterior):
 	returns a map corresponding to cumulative probabilities at each pixel
 	assumes ``greedy binning'' algorithm
 	"""
-        ranking = posterior.argsort()[::-1] ### find out ordering
-        cum = np.empty_like(posterior)
-        cum[ranking] = np.cumsum( posterior[ranking] ) ### and assign it to the correct indecies within cum
-        return cum
+	ranking = posterior.argsort()[::-1] ### find out ordering
+	cum = np.empty_like(posterior)
+	cum[ranking] = np.cumsum( posterior[ranking] ) ### and assign it to the correct indecies within cum
+	return cum
  
-        ### this looks really slow...
+	### this looks really slow...
 #	cum = np.zeros_like( posterior )
 #	c = 0.0
 #	for i in posterior.argsort()[::-1]:
@@ -190,48 +190,42 @@ def min_all_cos_dtheta_fast(pix, nside, nest=False, safe=False):
 	return min_all_cos_dtheta( boarder_pix, nside, nest=nest, safe=False )
 
 def __into_boarders(nside, pix, nest=False):
-        """
-        extracts the boarder from the list of pixels (pix)
-        """
-        ### establish an array representing the included pixels
-        npix = hp.nside2npix(nside)
-
-        truth = np.zeros((npix,), bool)
-        truth[pix] = True
-
-        abstruth = np.zeros((npix,), bool) ### need completely separate object, not just a pointer
-        abstruth[pix] = True
-
-        pixnums = np.arange(npix) ### convenient array we establish once
-
-        boarders = []
-        while truth.any():
-                ipix = pixnums[truth][0] ### take the first pixel
-                truth[ipix] = False ### remove it from the global set
-                boarder = []
-                to_check = [ipix] ### add it to the list of things to check
-
-                while len(to_check): # there are pixels in this mode we have to check
-                        ipix = to_check.pop() # take one pixel from those to be checked.
+	"""
+	extracts the boarder from the list of pixels (pix)
+	"""
+	### establish an array representing the included pixels
+	npix = hp.nside2npix(nside)
+	truth = np.zeros((npix,), bool)
+	truth[pix] = True
+	abstruth = np.zeros((npix,), bool) ### need completely separate object, not just a pointer
+	abstruth[pix] = True
+	pixnums = np.arange(npix) ### convenient array we establish once
+	boarders = []
+	while truth.any():
+		ipix = pixnums[truth][0] ### take the first pixel
+		truth[ipix] = False ### remove it from the global set
+		boarder = []
+		to_check = [ipix] ### add it to the list of things to check
+		
+		while len(to_check): # there are pixels in this mode we have to check
+			ipix = to_check.pop() # take one pixel from those to be checked.
 			isinterior = True
-                        for neighbour in hp.get_all_neighbours(nside, ipix, nest=nest):# get neighbors as rtheta, rphi
-
-                                if neighbour == -1: ### when neighbour == -1, there is no corresponding pixel in this direction
-                                        pass
+			for neighbour in hp.get_all_neighbours(nside, ipix, nest=nest):# get neighbors as rtheta, rphi
+				if neighbour == -1: ### when neighbour == -1, there is no corresponding pixel in this direction
+					pass
 				else:
 					isinterior *= abstruth[neighbour] ### check to see if the neighbor is in the set
-					                                  ### we don't care if it has already been visited.
-	                                # try to find pixel in skymap
-        	                        if truth[neighbour]: ### pixel in the set and has not been visited before
-                	                        truth[neighbour] = False ### remove neighbour from global set
-                                	        to_check.append( neighbour ) ### add to list of things to check
-	                                else: ### pixel not in the set or has been visited before
-        	                                pass
+										### we don't care if it has already been visited.
+										# try to find pixel in skymap
+					if truth[neighbour]: ### pixel in the set and has not been visited before
+						truth[neighbour] = False ### remove neighbour from global set
+						to_check.append( neighbour ) ### add to list of things to check
+					else: ### pixel not in the set or has been visited before
+						pass
 			if not isinterior:
 				boarder.append( ipix )
-                boarders.append( boarder )
-
-        return boarders
+		boarders.append( boarder )
+	return boarders
 
 ###
 def num_modes(posterior, theta, phi, nside=None, nest=False):
