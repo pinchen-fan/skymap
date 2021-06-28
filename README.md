@@ -50,7 +50,7 @@ There is no formal packaging for this module, at least not yet. However, we do p
 To get the code, do
 
 > cd ${srcdir}
-> git clone https://github.com/reedessick/skymap_statistics.git
+> git clone https://github.com/pinchen-fan/skymap_statistics.git
 
 To set up paths (this will need to be done each time you want to run the library)
 
