@@ -425,20 +425,17 @@ def dot(posterior1, posterior2):
 
 ###
 def geometric_overlap(pix1, pix2, nside, degrees=False):
-        """
-        computes the amount of area in the intersection and union of confidence regions from p1 and p2 defined by p_value
-        """
-        npix = hp.nside2npix(nside)
-        pixarea = hp.nside2pixarea(nside, degrees=degrees)
-
+	"""
+	computes the amount of area in the intersection and union of confidence regions from p1 and p2 defined by p_value
+	"""
+	npix = hp.nside2npix(nside)
+	pixarea = hp.nside2pixarea(nside, degrees=degrees)
 	posterior1 = np.zeros((npix,),int)
 	posterior2 = np.zeros((npix,),int)
-
 	posterior1[pix1] = 1
 	posterior2[pix2] = 1
-
-        intersection = np.sum( posterior1*posterior2 )
-        return intersection*pixarea, (np.sum(posterior1+posterior2) - intersection)*pixarea
+	intersection = np.sum( posterior1*posterior2 )
+	return intersection*pixarea, (np.sum(posterior1+posterior2) - intersection)*pixarea
 
 ###
 def spotcheck(posterior1, posterior2, conf):
