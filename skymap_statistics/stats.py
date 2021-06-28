@@ -40,7 +40,7 @@ def rankmap(posterior, npix=None, normed=True):
         WARNING: rankmaps do not sum to unity!
         """
 	if not npix:
-	        npix = len(posterior)
+		npix = len(posterior)
         rankmap = np.empty(npix,int)
         rankmap[posterior.argsort()] = np.arange(npix)[::-1]
         if normed:
