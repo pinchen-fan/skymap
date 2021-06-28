@@ -5,7 +5,8 @@ author      = "reed.essick@ligo.org"
 
 #-------------------------------------------------
 
-from html import HTML
+from html.parser import HTMLParser
+HTML=HTMLParser()
 import getpass
 
 import os
