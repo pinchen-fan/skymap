@@ -386,7 +386,7 @@ class snglFITS(object):
 
             mw.contour( post, 
                         ax, 
-                        colors     = colors.getColor().next(), ### always use the first color!
+                        colors     = next(colors.getColor()), ### always use the first color!
                         levels     = self.mollweide_levels,
                         alpha      = self.mollweide_alpha,
                         linewidths = self.mollweide_linewidths,
@@ -445,7 +445,7 @@ class snglFITS(object):
             obj[ifos] = {'H':d['H'], 'I':d['I'], 'thetaMAP':d['thetaMAP']}
 
             ### plot
-            ct.plot_dT( ax, sampDt, kde, xlim_dB=self.dT_xlim_dB, color=colors.getColor().next() ) ### always use the first color!
+            ct.plot_dT( ax, sampDt, kde, xlim_dB=self.dT_xlim_dB, color=next(colors.getColor()) ) ### always use the first color!
 
             ### decorate
             ax.set_xlabel(r'$\Delta t_{%s}\ [\mathrm{ms}]$'%(ifos))
@@ -540,7 +540,7 @@ class snglFITS(object):
                             tproj, 
                             Nbins   = Nbins, 
                             weights = self.postE, 
-                            color   = colors.getColor().next(), ### always get the first color!
+                            color   = next(colors.getColor()), ### always get the first color!
                             cmap    = self.color_map 
                           )
 
@@ -608,7 +608,7 @@ class snglFITS(object):
         fig = Figure( fig, self.output_dir, self.output_url, graceid=self.graceid, graceDbURL=self.graceDbURL, upload=self.upload )
         self.figind += 1
 
-        ax.semilogy( self.conf, [np.sum(_) for _ in self.modes], color=colors.getColor().next() ) ### always use the first color
+        ax.semilogy( self.conf, [np.sum(_) for _ in self.modes], color=next(colors.getColor()) ) ### always use the first color
 
         ax.set_xlim(xmin=0.0, xmax=1.0)
 
@@ -627,7 +627,7 @@ class snglFITS(object):
         fig = Figure( fig, self.output_dir, self.output_url, graceid=self.graceid, graceDbURL=self.graceDbURL, upload=self.upload )
         self.figind += 1
 
-        ax.plot( self.conf, self.maxDtheta, color=colors.getColor().next() ) ### always use the first color
+        ax.plot( self.conf, self.maxDtheta, color=next(colors.getColor()) ) ### always use the first color
 
         ax.set_xlim(xmin=0.0, xmax=1.0)
 
@@ -646,7 +646,7 @@ class snglFITS(object):
         fig = Figure( fig, self.output_dir, self.output_url, graceid=self.graceid, graceDbURL=self.graceDbURL, upload=self.upload )
         self.figind += 1
         
-        ax.plot( self.conf, [len(_) for _ in self.modes], color=colors.getColor().next() ) ### always use the first color
+        ax.plot( self.conf, [len(_) for _ in self.modes], color=next(colors.getColor()) ) ### always use the first color
 
         ax.set_xlim(xmin=0.0, xmax=1.0)
         ax.set_ylim(ymin=0.0)
@@ -1131,7 +1131,7 @@ class multFITS(object):
             for ind, fitsname in enumerate(self.fitsnames): ### iterate through FITS files
                 if verbose:
                     print( "    "+self.labels[fitsname] )
-                color = colors.getColor().next()
+                color = next(colors.getColor())
                 mw.contour( self.fitsdata[fitsname][coord],
                             ax,
                             colors     = color,
@@ -1170,7 +1170,7 @@ class multFITS(object):
                     mapY = 0.5*np.pi - mapY ### convert from Theta->Dec
 
                 gps = self.fitsdata[fitsname]['gps']
-                color = colors.getColor().next()
+                color = next(colors.getColor())
 
                 mw.annotate( ax,
                             projection          = projection,
@@ -1238,7 +1238,7 @@ class multFITS(object):
                 dd[fitsname] = {'thetaMAP' : np.arccos( sampDt[kde.argmax()]/maxDt )}
 
                 ### plot
-                color = colors.getColor().next()
+                color = next(colors.getColor())
                 ct.plot_dT( ax, sampDt, kde, xlim_dB=self.dT_xlim_dB, color=color )
                 fig.fig.text(0.10+0.02, 0.93-0.05*ind, self.texlabels[fitsname], color=color, ha='left', va='top')
 
@@ -1278,7 +1278,7 @@ class multFITS(object):
                                ifos,
                                coord   = 'E',
                                gps     = self.fitsdata[fitsname]['gps'],
-                               color   = colors.getColor().next(),
+                               color   = next(colors.getColor()),
                                alpha   = self.time_delay_alpha,
                                degrees = False,
                                twiny   = False, ### already did this
@@ -1338,7 +1338,7 @@ class multFITS(object):
                 Nbins = max(100, int(self.fitsdata[fitsname]['npix']**0.5/5))
 
                 ### plot
-                color = colors.getColor().next()
+                color = next(colors.getColor())
                 ct.histogram2d( rtheta,
                                 rphi,
                                 ax,
@@ -1414,7 +1414,7 @@ class multFITS(object):
                     maxDtheta.append( 0 )
                     modes.append( [] )
 
-            color = colors.getColor().next()
+            color = next(colors.getColor())
 
             sizax.semilogy( self.conf, [np.sum(_) for _ in modes], color=color )
             sizfig.fig.text(0.10+0.02, 0.93-0.05*ind, self.texlabels[fitsname], color=color, ha='left', va='top')
@@ -1581,7 +1581,7 @@ class multFITS(object):
                                                }
 
             ### plot on figures
-            color = colors.getColor().next()
+            color = next(colors.getColor())
             label = "%s - %s"%(self.texlabels[fits1], self.texlabels[fits2])
 
             # cr intersection, union, and ratio
