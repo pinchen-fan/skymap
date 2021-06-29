@@ -1131,7 +1131,7 @@ class multFITS(object):
             for ind, fitsname in enumerate(self.fitsnames): ### iterate through FITS files
                 if verbose:
                     print( "    "+self.labels[fitsname] )
-                color = getColor.next()
+                color = colors.getColor.next()
                 mw.contour( self.fitsdata[fitsname][coord],
                             ax,
                             colors     = color,
