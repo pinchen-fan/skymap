@@ -1141,7 +1141,7 @@ class multFITS(object):
                           )
                 fig.fig.text(0.01, 0.99-0.05*(ind), self.texlabels[fitsname], color=color, ha='left', va='top')
             mw.annotate( ax,
-                         continents       = mw.gen_continents(coord='E', gps=self.gps) if coord=='E' else [],
+                         continents       = mw.gen_continents(coord='E', gps=self.fitsdata[fitsname]['gps']) if coord=='E' else [],
                          continents_color = self.continents_color,
                          continents_alpha = self.continents_alpha,
                        )
