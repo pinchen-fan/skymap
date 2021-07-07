@@ -265,7 +265,13 @@ def healpix_contour(post, ax, *args, **kwargs):
     x = np.linspace(*ax.get_xlim(), num=500)
     y = np.linspace(*ax.get_ylim(), num=500)
     xx, yy = np.meshgrid(x, y)
-
+    
+    # Added these four rows below to turn x-y coordinates into angles
+    xmin, xmax = ax.get_xlim()
+    ymin, ymax = ax.get_ylim()
+    xx = (xx + 0.5)*(np.pi)/(xmax-xmin)
+    yy = (yy + 0.5)*(np.pi/2)/(ymax-ymin)
+    
     # Evaluate the function everywhere.
     zz = _healpix_lookup(post, xx, yy, nest=nest, dlon=dlon)
 
