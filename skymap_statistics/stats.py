@@ -151,7 +151,7 @@ def min_all_cos_dtheta(pix, nside, nest=False, safe=False):
 	"""
 	min_c = 1.0
 	thetas, phis = hp.pix2ang(nside, pix)
-	for i, (t1, p1) in enumerate(zip(thetas, phis)[:-1]):
+	for i, (t1, p1) in enumerate(list(zip(thetas, phis))[:-1]):
 		t2 = thetas[i+1:] 
 		p2 = phis[i+1:]
 		c = np.amin(cos_dtheta(t1,p1,t2,p2,safe=safe))
