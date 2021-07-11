@@ -5,6 +5,8 @@ author      = "reed.essick@ligo.org"
 
 #-------------------------------------------------
 
+# rename html to be Html and use
+# from Html import HTML
 from html import HTML
 import getpass
 
