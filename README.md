@@ -82,7 +82,7 @@ This should produce a file called GeographicMap.fits.gz. Now, we need to compute
 
 This should produce two files: H-antennaNorm_Geographic.fits and L-antennaNorm_Geographic.fits. It will also print some statistics about the antenna patterns to stdout. Because it will be useful down the road, I also normalize the antenna patterns so the map sums to one.
 
-> python -c "import healpy as hp ; import numpy as np ; post=hp.read_map('H-antennaNorm_Geographic.fits') ; hp.write_map('H-antennaNorm_Geographic.fits', post/np.sum(post)) ; post=hp.read_map('L-antennaNorm_Geographic.fits') ; hp.write_map('L-antennaNorm_Geographic.fits', post/np.sum(post))"
+> python -c "import healpy as hp ; import numpy as np ; post=hp.read_map('H-antennaNorm_Geographic.fits') ; hp.write_map('H-antennaNorm_Geographic.fits', post/np.sum(post), overwrite=True) ; post=hp.read_map('L-antennaNorm_Geographic.fits') ; hp.write_map('L-antennaNorm_Geographic.fits', post/np.sum(post), overwrite=True)"
 
 Now, we want to actually generate the mollweide projection. There are a lot of moving parts here, so please reference plot_maps.py's help string for details on what each option actually controls. Note, we'll generate a few plots here with a few different options.
 
