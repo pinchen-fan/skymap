@@ -23,7 +23,7 @@ from matplotlib import text
 from matplotlib import ticker
 from matplotlib.ticker import Formatter, FixedLocator
 from matplotlib import patheffects
-from matplotlib.projections import projection_registry
+from matplotlib.projections.__init__ import projection_registry
 from matplotlib.projections.geo import MollweideAxes
 from matplotlib.transforms import Transform, Affine2D
 
