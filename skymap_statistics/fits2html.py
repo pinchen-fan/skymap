@@ -6,7 +6,7 @@ author      = "reed.essick@ligo.org"
 #-------------------------------------------------
 
 from Html import HTML #install the "Html" package from this repository. Note that this "Html" package is different from the pre-installed "html" package in Python.
-HTML=HTMLParser()
+
 import getpass
 
 import os
