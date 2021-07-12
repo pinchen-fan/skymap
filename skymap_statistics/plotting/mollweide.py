@@ -23,7 +23,7 @@ from matplotlib import text
 from matplotlib import ticker
 from matplotlib.ticker import Formatter, FixedLocator
 from matplotlib import patheffects
-from matplotlib.projections import projection_registry
+from matplotlib.projections.__init__ import projection_registry
 from matplotlib.projections.geo import MollweideAxes
 from matplotlib.transforms import Transform, Affine2D
 
@@ -266,6 +266,11 @@ def healpix_contour(post, ax, *args, **kwargs):
     y = np.linspace(*ax.get_ylim(), num=500)
     xx, yy = np.meshgrid(x, y)
 
+    xmin, xmax = ax.get_xlim()
+    ymin, ymax = ax.get_ylim()
+    xx = (xx + 0.5)*(np.pi)/(xmax-xmin)
+    yy = (yy + 0.5)*(np.pi/2)/(ymax-ymin)
+    
     # Evaluate the function everywhere.
     zz = _healpix_lookup(post, xx, yy, nest=nest, dlon=dlon)
 
