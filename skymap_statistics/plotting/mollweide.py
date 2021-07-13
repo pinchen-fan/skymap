@@ -23,9 +23,10 @@ from matplotlib import text
 from matplotlib import ticker
 from matplotlib.ticker import Formatter, FixedLocator
 from matplotlib import patheffects
-from matplotlib.projections.__init__ import projection_registry
+#from matplotlib.projections.__init__ import projection_registry
 from matplotlib.projections.geo import MollweideAxes
 from matplotlib.transforms import Transform, Affine2D
+from matplotlib.projections import register_projection
 
 ### non-standard libraries
 from skymap_statistics.detector_cache import detectors ### for detector arms
@@ -195,9 +196,14 @@ class AstroHoursMollweideAxes(AstroDegreesMollweideAxes):
 
 ### actually register custom projections
 
-projection_registry.register(FixedMollweideAxes)
-projection_registry.register(AstroDegreesMollweideAxes)
-projection_registry.register(AstroHoursMollweideAxes)
+#projection_registry.register(FixedMollweideAxes)
+#projection_registry.register(AstroDegreesMollweideAxes)
+#projection_registry.register(AstroHoursMollweideAxes)
+
+
+register_projection(FixedMollweideAxes)
+register_projection(AstroDegreesMollweideAxes)
+register_projection(AstroHoursMollweideAxes)
 
 #------------------------
 
