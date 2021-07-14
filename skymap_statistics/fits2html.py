@@ -295,7 +295,7 @@ class snglFITS(object):
             print( "building mollweide projections" )
         self.mollweide = dict()
 
-        for projection, coord, post in [('astro hours mollweide', 'C', self.postC), ('mollweide', 'E', self.postE)]:
+        for projection, coord, post in [('astro mollweide', 'C', self.postC), ('mollweide', 'E', self.postE)]:
 
             ### generate figure
             fig, ax = mw.gen_fig_ax( self.figind, projection=projection )
@@ -1120,7 +1120,7 @@ class multFITS(object):
             print( "building mollweide projections" )
         self.mollweide = dict()
 
-        for projection, coord in [('astro hours mollweide', 'C'), ('mollweide', 'E')]:
+        for projection, coord in [('astro mollweide', 'C'), ('mollweide', 'E')]:
 
             ### generate figure
             fig, ax = mw.gen_fig_ax( self.figind, projection=projection )
