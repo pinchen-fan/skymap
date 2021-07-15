@@ -229,7 +229,7 @@ class snglFITS(object):
         header = dict(header)
 
         ### ensure we are in RING ordering
-        if header['ORDERING']=='NESTED':
+        if header['ORDERING']=='NEST':
             post = hp.reorder( post, n2r=True )
 
         ### extract gps time
@@ -1083,7 +1083,7 @@ class multFITS(object):
             header = dict(header)
 
             ### ensure we are in RING ordering
-            if header['ORDERING']=='NESTED':
+            if header['ORDERING']=='NEST':
                 post = hp.reorder( post, n2r=True )
 
             ### extract gps time
