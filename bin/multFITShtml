@@ -9,7 +9,6 @@ author      = "reed.essick@ligo.org"
 #-------------------------------------------------
 
 import os
-import ligo.skymap.plot
 
 import numpy as np
 
