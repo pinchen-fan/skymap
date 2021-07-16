@@ -1131,7 +1131,7 @@ class multFITS(object):
             for ind, fitsname in enumerate(self.fitsnames): ### iterate through FITS files
                 if verbose:
                     print( "    "+self.labels[fitsname] )
-                color = next(colors.getColor())
+                color = next(getColor)
                 mw.contour( self.fitsdata[fitsname][coord],
                             ax,
                             colors     = color,
@@ -1170,7 +1170,7 @@ class multFITS(object):
                     mapY = 0.5*np.pi - mapY ### convert from Theta->Dec
 
                 gps = self.fitsdata[fitsname]['gps']
-                color = next(colors.getColor())
+                color = next(getColor)
 
                 mw.annotate( ax,
                             projection          = projection,
@@ -1238,7 +1238,7 @@ class multFITS(object):
                 dd[fitsname] = {'thetaMAP' : np.arccos( sampDt[kde.argmax()]/maxDt )}
 
                 ### plot
-                color = next(colors.getColor())
+                color = next(getColor)
                 ct.plot_dT( ax, sampDt, kde, xlim_dB=self.dT_xlim_dB, color=color )
                 fig.fig.text(0.10+0.02, 0.93-0.05*ind, self.texlabels[fitsname], color=color, ha='left', va='top')
 
@@ -1278,7 +1278,7 @@ class multFITS(object):
                                ifos,
                                coord   = 'E',
                                gps     = self.fitsdata[fitsname]['gps'],
-                               color   = next(colors.getColor()),
+                               color   = next(getColor),
                                alpha   = self.time_delay_alpha,
                                degrees = False,
                                twiny   = False, ### already did this
@@ -1338,7 +1338,7 @@ class multFITS(object):
                 Nbins = max(100, int(self.fitsdata[fitsname]['npix']**0.5/5))
 
                 ### plot
-                color = next(colors.getColor())
+                color = next(getColor)
                 ct.histogram2d( rtheta,
                                 rphi,
                                 ax,
@@ -1414,7 +1414,7 @@ class multFITS(object):
                     maxDtheta.append( 0 )
                     modes.append( [] )
 
-            color = next(colors.getColor())
+            color = next(getColor)
 
             sizax.semilogy( self.conf, [np.sum(_) for _ in modes], color=color )
             sizfig.fig.text(0.10+0.02, 0.93-0.05*ind, self.texlabels[fitsname], color=color, ha='left', va='top')
@@ -1581,7 +1581,7 @@ class multFITS(object):
                                                }
 
             ### plot on figures
-            color = next(colors.getColor())
+            color = next(getColor)
             label = "%s - %s"%(self.texlabels[fits1], self.texlabels[fits2])
 
             # cr intersection, union, and ratio
