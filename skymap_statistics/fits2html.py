@@ -151,7 +151,7 @@ class snglFITS(object):
 
         ### which IFOs are important
         for ifo in ifos:
-            assert detector_cache.detectors.has_key(ifo), "ifo=%s is not understood!"%ifo
+            assert ifo in detector_cache.detectors, "ifo=%s is not understood!"%ifo
         self.ifos = sorted(ifos)
 
         self.ifo_pairs = []
@@ -1002,7 +1002,7 @@ class multFITS(object):
 
         ### which IFOs are important
         for ifo in ifos:
-            assert detector_cache.detectors.has_key(ifo), "ifo=%s is not understood!"%ifo
+            assert ifo in detector_cache.detectors, "ifo=%s is not understood!"%ifo
         self.ifos = sorted(ifos)
 
         self.ifo_pairs = []
