@@ -141,7 +141,7 @@ class AstroDegreesMollweideAxes(FixedMollweideAxes):
         number = (360.0 / degrees) + 1
         self.xaxis.set_major_locator(
             FixedLocator(
-                np.linspace(0, 2*np.pi, number, True)[1:-1]))
+                np.linspace(0, 2*np.pi, int(number), True)[1:-1]))
 
     def _set_lim_and_transforms(self):
         # Copied from matplotlib.geo.GeoAxes._set_lim_and_transforms and modified
