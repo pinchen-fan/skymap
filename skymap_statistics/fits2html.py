@@ -1605,6 +1605,7 @@ class multFITS(object):
             arr_fig.fig.text(0.10+0.02, 0.93-0.05*ind, label, color=color, ha='left', va='top')
 
             # contained probabilities
+            crc_ax.plot( self.conf, self.conf, color='grey', linestyle=':', label= '45-deg line' )
             crc_ax.plot( self.conf, conf_A2B, color=color, linestyle='-', label=label )
             crc_tx.plot( self.conf, conf_B2A, color=color, linestyle='--', label=label )
             crc_fig.fig.text(0.50, 0.93-0.05*(ind+1), label, color=color, ha='center', va='top')
