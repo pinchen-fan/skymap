@@ -43,7 +43,7 @@ def gen_fig_ax( figind, figwidth=6, figheight=5 ):
     '''
     return genCR_fig_ax(figind, figwidth=figwidth, figheigh=figheight)
 
-def genCR_fig_ax( figind, figwidth=6, figheight=5, grid=True ):
+def genCR_fig_ax( figind, figwidth=6, figheight=5.5, grid=True ):
     '''
     generates figure and axis in the set-up we prefer
     '''
