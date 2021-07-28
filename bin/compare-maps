@@ -64,7 +64,7 @@ if opts.degrees:
     angle_conversion = 180/np.pi
 else:
     unit = "radians"
-    areaunit = "stradians"
+    areaunit = "steradians"
     angle_conversion = 1.0
 
 #==========================================================
