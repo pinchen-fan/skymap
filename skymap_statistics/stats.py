@@ -111,6 +111,18 @@ def estang(posterior, nside=None):
 	return hp.pix2ang(nside, posterior.argmax())
 
 ###
+def center_of_mass(posterior, nside = None):
+        """
+        returns the position associated with the center of mass of the posterior
+        """
+        cm = 0
+        if not nside:
+                nside = hp.npix2nside(len(posterior))
+        for i in range(0, len(posterior)):
+                cm = cm + i * posterior[i]
+        return hp.pix2ang(nside, int(cm))
+	
+###
 def searched_area(posterior, theta, phi, nside=None, nest=False, degrees=False):
 	"""
 	computes the searched area given a location
