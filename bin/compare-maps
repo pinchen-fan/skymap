@@ -147,6 +147,7 @@ for ind, label1 in enumerate(labels):
             t1c, p1c = stats.center_of_mass(post1)
             t2, p2 = d2['estang']
             t2c, p2c = stats.center_of_mass(post2)
+            header = "dtheta_cm_max"
             header_2 = "dtheta_cm"
             messages.append("%s : %.3f %s"%(header2, angle_conversion*np.arccos(stats.cos_dtheta(t1c, p1c, t2c, p2c, safe=True)), unit) )
             messages.append("%s : %s = %.3f %s"%(header, label1, angle_conversion*np.arccos(stats.cos_dtheta(t1, p1, t1c, p1c, safe=True)), unit) )
