@@ -115,12 +115,15 @@ def center_of_mass(posterior, nside = None):
         """
         returns the position associated with the center of mass of the posterior
         """
-        cm = 0
+        cm_theta = 0
+        cm_phi = 0
         if not nside:
                 nside = hp.npix2nside(len(posterior))
-        for i in range(0, len(posterior)):
-                cm = cm + i * posterior[i]
-        return hp.pix2ang(nside, int(cm))
+        idex = np.arange(0, len(posterior))
+        theta, phi = hp.pix2ang(nside, idex)
+        cm_theta = sum(theta * posterior[idex])
+        cm_phi = sum(phi * posterior[idex])
+        return cm_theta, cm_phi
 	
 ###
 def searched_area(posterior, theta, phi, nside=None, nest=False, degrees=False):
